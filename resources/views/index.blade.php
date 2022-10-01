@@ -46,7 +46,14 @@
                         All
                     </a>
                 </li>
-                <li class="nav-posts-li">
+                @foreach ($categories as $category)
+                    <li class="nav-posts-li">
+                        <a id="{{ $category->name }}" class="nav-link  nav-link-posts">
+                            {{ $category->name }}
+                        </a>
+                    </li>
+                @endforeach
+                {{-- <li class="nav-posts-li">
                     <a id="company_updates" class="nav-link nav-link-posts">
                         Company updates
                     </a>
@@ -55,7 +62,7 @@
                     <a id="tips" class="nav-link nav-link-posts">
                         Tips
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <div class="wrapper" id="blogs">

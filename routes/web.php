@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\ApplicationManagement\Http\Controllers\IndexPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', IndexPageController::class);
+
 Route::get('/post/{id}', function ($id) {
     return view('post', ['id' => $id]);
 });
