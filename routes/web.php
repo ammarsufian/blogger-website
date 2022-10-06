@@ -1,7 +1,8 @@
 <?php
 
-use App\Domains\ApplicationManagement\Http\Controllers\IndexPageController;
 use Illuminate\Support\Facades\Route;
+use App\Domains\ApplicationManagement\Http\Controllers\IndexPageController;
+use App\Domains\ApplicationManagement\Http\Controllers\PostDetailPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', IndexPageController::class);
+Route::get('/', IndexPageController::class)->name('index');
 
-Route::get('/post/{id}', function ($id) {
-    return view('post', ['id' => $id]);
-});
+Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');

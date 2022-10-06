@@ -27,7 +27,7 @@
                     quis eleifend vivamus bland.
                     Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
                     vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
+                    quis eleifend vivamus bland. Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
                     vehicula massa, amet aliquet tempor. Commodo eleifend vel
                     quis eleifend vivamus bland.
                 </p>
@@ -53,74 +53,30 @@
                         </a>
                     </li>
                 @endforeach
-                {{-- <li class="nav-posts-li">
-                    <a id="company_updates" class="nav-link nav-link-posts">
-                        Company updates
-                    </a>
-                </li>
-                <li class="nav-posts-li">
-                    <a id="tips" class="nav-link nav-link-posts">
-                        Tips
-                    </a>
-                </li> --}}
             </ul>
         </nav>
         <div class="wrapper" id="blogs">
-            <figure class="card-post">
-                <div class="card-banner">
-                    <img class="banner-img" src='{{ asset('test-img/FWRITyxXkAAFSC4.jfif') }}' alt=''>
-                </div>
-                <div class="card-body">
-                    <time datetime="JULY 4, 2022" class="blog-date">JULY 15, 2022</time>
-                    <h2 class="blog-title">
-                        Nullam nibh feugiat pulvinar est faucibus laoreet.
-                    </h2>
-                    <p class="blog-description">
-                        Nunc purus dui arcu, fermentum risus, imperdiet iaculis commodo ut. Egestas in cursus nisi, morbi
-                        purus
-                        lorem donec nisl.
-                    </p>
-                    <h6>COMPANY UPDATES</h6>
-                </div>
-            </figure>
-            <figure class="card-post">
-                <div class="card-banner">
-                    <img class="banner-img" src='{{ asset('test-img/FWRITyxXkAAFSC4.jfif') }}' alt=''>
-                </div>
-                <div class="card-body">
-                    <time datetime="JULY 4, 2022" class="blog-date">JULY 15, 2022</time>
-                    <h2 class="blog-title">
-                        Nullam nibh feugiat pulvinar est faucibus laoreet.
-                    </h2>
-                    <p class="blog-description">
-                                Nunc purus dui arcu, fermentum risus,
-                                imperdiet iaculis commodo ut. Egestas in cursus nisi,
-                                morbi purus lorem donec nisl. Nunc purus dui arcu,
-                                fermentum risus, imperdiet iaculis commodo ut.
-                    </p>
-                    <h6>Tips</h6>
-
-                </div>
-            </figure>
-
-            <figure class="card-post">
-                <div class="card-banner">
-                    <img class="banner-img" src='{{ asset('test-img/coffee bean.jpg') }}' alt=''>
-                </div>
-                <div class="card-body">
-                    <time datetime="JULY 4, 2022" class="blog-date">JULY 15, 2022</time>
-                    <h2 class="blog-title">
-                        Nullam nibh feugiat pulvinar est faucibus laoreet.
-                    </h2>
-                    <p class="blog-description">
-                        Nunc purus dui arcu, fermentum risus, imperdiet iaculis commodo ut. Egestas in cursus nisi, morbi
-                        purus
-                        lorem donec nisl.
-                    </p>
-                    <h6>Tips</h6>
-                </div>
-            </figure>
-
+            @foreach ($posts as $post)
+                    <figure class="card-post">
+                        <a href="{{ route('post.show', $post->id) }}" class="card-post-link">
+                        <div class="card-banner">
+                            <img class="banner-img" src='{{ asset('test-img/FWRITyxXkAAFSC4.jfif') }}' alt=''>
+                        </div>
+                        <div class="card-body">
+                            <time datetime="JULY 4, 2022" class="blog-date">
+                                {{ $post->created_at }}
+                            </time>
+                            <h2 class="blog-title">
+                                {{ $post->title }}
+                            </h2>
+                            <p class="blog-description">
+                                {{(Str::words($post->content, 30)) }}
+                            </p>
+                            <h6>{{ $post->category->name }}</h6>
+                        </div>
+                        </a>
+                    </figure>
+            @endforeach
             <figure class="card-post card-grid" id="order_partner">
                 <div class="card-order">
                     <h2 class="blog-title">
@@ -139,43 +95,6 @@
                     </a>
                 </div>
             </figure>
-
-            <figure class="card-post">
-                <div class="card-banner">
-                    <img class="banner-img" src='{{ asset('test-img/FVyOs1lXsAIjQPs.jfif') }}' alt=''>
-                </div>
-                <div class="card-body">
-                    <time datetime="JULY 4, 2022" class="blog-date">JULY 15, 2022</time>
-                    <h2 class="blog-title">
-                        Nullam nibh feugiat pulvinar est faucibus laoreet.
-                    </h2>
-                    <p class="blog-description">
-                        Nunc purus dui arcu, fermentum risus, imperdiet iaculis commodo ut. Egestas in cursus nisi, morbi
-                        purus
-                        lorem donec nisl.
-                    </p>
-                    <h6>COMPANY UPDATES</h6>
-
-                </div>
-            </figure>
-
-            <figure class="card-post">
-                <div class="card-banner">
-                    <img class="banner-img" src='{{ asset('test-img/FXeYPFFXgAIc3Od.jfif') }}' alt=''>
-                </div>
-                <div class="card-body">
-                    <time datetime="JULY 15, 2022" class="blog-date">JULY 15, 2022</time>
-                    <h2 class="blog-title">
-                        Justo, suscipit nibh lacus amet gravida.
-                    </h2>
-                    <p class="blog-description">
-                        Malesuada sed risus, sed amet viverra fermentum egestas. sed risus, sed amet viverra fermentum
-                        egestas.
-                    </p>
-                    <h6>PROMOTIONS</h6>
-                </div>
-            </figure>
-
         </div>
         <div id="view_more" class="view-more">View more</div>
 

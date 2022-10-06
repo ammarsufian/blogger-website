@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Domains\Interfaces\Actionable;
 use App\Domains\ApplicationManagement\Models\Post;
 
-class GetAllPostAction implements Actionable
+class GetPostListAction implements Actionable
 {
     protected Request $request;
 

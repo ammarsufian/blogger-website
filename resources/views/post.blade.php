@@ -1,25 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Page Title') {{-- post title --}}
+@section('title', "$post->title")
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/post.css') }}">
 @endsection
 
-@section('head')
+@section('meta')
 
     {{-- meta tag for search engine --}}
-    <meta name="description" content="{{-- general description for post --}}">
-    <meta name="copyright" content="" />{{-- company name --}}
+    <meta name="description" content="{{ Str::words($post->content, 25) }}">
+    <meta name="copyright" content="COVA" />{{-- company name --}}
     <meta name="author" content="">{{-- author name --}}
-    <meta name="revised" content="" />{{-- date --}}
-    <meta name="keywords" content="" />{{-- keywords tags for post --}}
+    <meta name="revised" content="{{ \Carbon\Carbon::parse($post->created_at)->format('m-d-Y') }}" />{{-- date --}}
+    <meta name="keywords" content="{{ $tag_meta }}" />{{-- keywords tags for post --}}
 
     {{-- facebook meta --}}
-    <meta property="og:title" content="" />{{-- post title --}}
+    <meta property="og:title" content="{{$post->title}}" />{{-- post title --}}
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="" />{{-- post url --}}
+    <meta property="og:url" content="{{ url()->current() }}" />{{-- post url --}}
     <meta property="og:image" content="" />{{-- post image --}}
-    <meta property="og:description" content="" />{{-- general description for post --}}
+    <meta property="og:description" content="{{ Str::words($post->content, 100) }}" />{{-- general description for post --}}
     <meta property="og:site_name" content="" />{{-- COVABLOG.com --}}
 
     {{-- twitter meta --}}
@@ -33,24 +33,28 @@
 @endsection
 
 @section('content')
-    {{-- dsiplay felx bootstrap 5.2 --}}
     <article class="container">
         <div class="nav-home">
-            <a href="">
+            <a href="{{ route('index') }}">
                 Home
             </a>
             <span>
-                post title
+                /
+            </span>
+            <span>
+                {{ $post->title }}
             </span>
         </div>
-        <h1>Making the perfect cup of coffee at home</h1>
+        <h1>{{ $post->title }}</h1>
         <div class="head-content">
             <div>author</div>
-            <div>category</div>
-            <time datetime="JULY 15, 2022" class="">JULY 15, 2022</time>
+            <div>{{ $post->category->name }}</div>
+            <time datetime="{{ \Carbon\Carbon::parse($post->created_at)->format('m-d-Y') }}" class="">
+                {{ \Carbon\Carbon::parse($post->created_at)->format('M d Y') }}
+            </time>
         </div>
         <div class="d-flex justify-content-center">
-            <img src="{{ asset('test-img/FXt000uUIAEFjgq.jfif') }}" class="img-post" alt="" />
+            <img src="{{ asset('test-img/FXeYPFFXgAIc3Od.jfif') }}" class="img-post" alt="" />
         </div>
         <div class="container">
 
@@ -60,53 +64,18 @@
                 <img src="{{ asset('img/icon/linkedin.svg') }}" alt="" srcset="">
                 <img src="{{ asset('img/icon/share.svg') }}" alt="" srcset=""> --}}
             </div>
-            <div class="">
-                <h1>
-                    Tentang Creetivity
-                    Cova coffee
-                </h1>
-                <p>
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland. Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                </p>
-                <p>
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland. Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                </p>
-                <p>
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland. Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                </p>
-                <p>
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                    Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland. Vel orci neque, urna, pulvinar eu. Feugiat id turpis justo,
-                    vehicula massa, amet aliquet tempor. Commodo eleifend vel
-                    quis eleifend vivamus bland.
-                </p>
-                <time datetime="JULY 4, 2022">JULY 4, 2022</time>
+            <div class="container markdown" id="markdown">
+                {!! str::markdown($post->content) !!}
+
+                <div class="inter-font mt-5">
+                    <hr style="width: 34px;">
+                    <div>Posted be Cova</div>
+                    <span>Category : </span>
+                    <u> <a href="{{route('index')}}"></a> {{ $post->category->name }}</u>
+                </div>
+
             </div>
+        </div>
         </div>
     </article>
     {{-- <button  class="btn" >

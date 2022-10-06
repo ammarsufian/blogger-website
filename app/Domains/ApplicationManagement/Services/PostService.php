@@ -2,7 +2,8 @@
 
 namespace App\Domains\ApplicationManagement\Services;
 
-use App\Domains\ApplicationManagement\Actions\GetAllPostAction;
+use App\Domains\ApplicationManagement\Actions\GetPostListAction;
+use App\Domains\ApplicationManagement\Actions\GetPostDetailAction;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class PostService
     public function index(Request $request)
     {
         try {
-            $results = (new GetAllPostAction($request))->execute();
+            $results = (new GetPostListAction($request))->execute();
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
@@ -21,4 +22,18 @@ class PostService
 
         return $results;
     }
+
+    public function show(Request $request)
+    {
+        try {
+            $results = (new GetPostDetailAction($request))->execute();
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+                'success' => false
+            ], 400);
+        }
+        return $results;
+    }
+
 }
