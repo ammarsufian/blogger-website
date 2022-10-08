@@ -58,19 +58,20 @@
         <div class="wrapper" id="blogs">
             @foreach ($posts as $post)
                     <figure class="card-post">
-                        <a href="{{ route('post.show', $post->id) }}" class="card-post-link">
+                        <a href="{{ route('post.show', [app()->getLocale(),$post->id]) }}" class="card-post-link">
                         <div class="card-banner">
                             <img class="banner-img" src='{{ asset('test-img/FWRITyxXkAAFSC4.jfif') }}' alt=''>
                         </div>
                         <div class="card-body">
-                            <time datetime="JULY 4, 2022" class="blog-date">
-                                {{ $post->created_at }}
+                            <time datetime="$post->created_at" class="blog-date">
+                                {{ \Carbon\Carbon::parse($post->created_at)->format('M d Y') }}
                             </time>
                             <h2 class="blog-title">
                                 {{ $post->title }}
                             </h2>
                             <p class="blog-description">
-                                {{(Str::words($post->content, 30)) }}
+                                {{-- {{preg_replace('/\s+/', ' ', strip_tags(Str::markdown(Str::words($post->content, 30))))}} --}}
+                                {{ (Str::words($post->content, 30)) }}
                             </p>
                             <h6>{{ $post->category->name }}</h6>
                         </div>
@@ -80,23 +81,23 @@
             <figure class="card-post card-grid" id="order_partner">
                 <div class="card-order">
                     <h2 class="blog-title">
-                        Get a coffee when you need one
+                        {{__('Get a coffee when you need one')}}
                     </h2>
                     <a class="blog-description">
-                        Sign up to order
+                        {{__('Sign up to order')}}
                     </a>
                 </div>
                 <div class="card-partner">
                     <h2 class="blog-title">
-                        Reach more customers than ever.
+                        {{__('Reach more customers than ever.')}}
                     </h2>
                     <a class="blog-description">
-                        Sign up to be partner
+                        {{__('Sign up to be partner')}}
                     </a>
                 </div>
             </figure>
         </div>
-        <div id="view_more" class="view-more">View more</div>
+        <div id="view_more" class="view-more">{{__('View more')}}</div>
 
     </section>
 @endsection

@@ -35,8 +35,8 @@
 @section('content')
     <article class="container">
         <div class="nav-home">
-            <a href="{{ route('index') }}">
-                Home
+            <a href="{{ route('index',app()->getLocale()) }}">
+                {{__('Home')}}
             </a>
             <span>
                 /
@@ -45,6 +45,13 @@
                 {{ $post->title }}
             </span>
         </div>
+        {{-- <nav aria-label="breadcrumb nav-home">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ route('index','ar') }}">{{__('Home')}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ __('ar') }}</li>
+            </ol>
+          </nav> --}}
+
         <h1>{{ $post->title }}</h1>
         <div class="head-content">
             <div>author</div>
@@ -71,7 +78,7 @@
                     <hr style="width: 34px;">
                     <div>Posted be Cova</div>
                     <span>Category : </span>
-                    <u> <a href="{{route('index')}}"></a> {{ $post->category->name }}</u>
+                    <u> {{ $post->category->name }}</u>
                 </div>
 
             </div>

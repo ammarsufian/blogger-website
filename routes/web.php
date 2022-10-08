@@ -15,6 +15,7 @@ use App\Domains\ApplicationManagement\Http\Controllers\PostDetailPageController;
 |
 */
 
-Route::get('/', IndexPageController::class)->name('index');
-
-Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');
+Route::prefix('{local}')->group(function () {
+    Route::get('/', IndexPageController::class)->name('index');
+    Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');
+});

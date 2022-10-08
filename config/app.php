@@ -83,7 +83,7 @@ return [
     */
 
     'locale' => 'ar',
-
+    'allowed_languages' => env('allowed_language', ['en', 'ar']),
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
