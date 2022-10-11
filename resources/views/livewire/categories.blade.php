@@ -9,14 +9,19 @@
         <ul class="nav nav-posts-ul">
 
             <li class="nav-posts-li">
-                <a wire:click="showAllPosts() id="all" class="nav-link  nav-link-posts active">
+                <a wire:click="showAllPosts() id="all" class="nav-link  nav-link-posts {{$category->id??'active'}}">
                     All
                 </a>
             </li>
-            @foreach ($categories as $category)
+
+            @foreach ($categories as $category_item)
                 <li class="nav-posts-li">
-                    <a wire:click="showPostsByCategory({{ $category->id }})" class="nav-link  nav-link-posts">
-                        {{ $category->name }}
+                    <a wire:click="showPostsByCategory({{ $category_item->id }})"
+                        class="nav-link  nav-link-posts
+                        @if((isset($category))&&($category->id==$category_item->id))
+                        {{'active'}}
+                        @endif">
+                        {{ $category_item->name }}
                     </a>
                 </li>
             @endforeach

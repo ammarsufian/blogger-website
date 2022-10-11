@@ -332,6 +332,8 @@ input[type=checkbox]:checked~.menu_language {
 .wrapper-posts {
     display: flex;
     flex-wrap: wrap;
+    width: -moz-available;
+    max-width: 1523px;
 }
 .wrapper {
     display: flex;
@@ -350,7 +352,6 @@ input[type=checkbox]:checked~.menu_language {
     transition: 250ms all ease-in-out;
     cursor: pointer;
 }
-
 .card-post:hover {
     transform: scale(1.05);
 }
