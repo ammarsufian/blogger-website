@@ -32,8 +32,8 @@ a:hover {
 }
 
 .logo-img {
-    margin-left: 5px;
-    margin-right: 82px;
+    margin-left: 15px;
+    margin-right: 42px;
     margin-bottom: 5px;
     width: 126px;
     height: 32px;
@@ -41,7 +41,6 @@ a:hover {
 
 @media screen and (max-width: 768px) {
     .logo-img {
-        margin-left: 5px;
         margin-bottom: 0px;
         margin-right: 0;
 
@@ -53,6 +52,8 @@ a:hover {
 .logo-img-menu {
     width: 94px;
     height: 32px;
+    margin-top: 10px;
+    margin-right: 20px;
 }
 
 .hamburger {
@@ -216,8 +217,7 @@ input[type=checkbox]:checked~.menu_language {
 
 .single-post>.post>figcaption h1 {
     margin: 0;
-    width: 400px;
-    height: 193px;
+    width: 500px;
     left: 845px;
     top: 189px;
     font-size: 58px;
@@ -245,15 +245,14 @@ input[type=checkbox]:checked~.menu_language {
 
     .single-post>.post>img {
         width: 480px;
-        height: 346px;
     }
 
-    .single-post>.post>figcaption p {
-        width: 400px;
-    }
 }
 
 @media all and (max-width: 930px) {
+    .single-post > .post > figcaption{
+        width: inherit;
+    }
     .single-post>.post {
         height: auto;
         flex-wrap: wrap;
@@ -266,9 +265,9 @@ input[type=checkbox]:checked~.menu_language {
     }
 
     .single-post>.post>figcaption h1 {
-        height: auto;
-        font-size: 40px;
+        font-size: 42px;
         line-height: 50px;
+        width: auto;
     }
 }
 
@@ -285,8 +284,8 @@ input[type=checkbox]:checked~.menu_language {
 
     .single-post>.post>figcaption h1 {
         width: 350px;
-        height: auto;
-        font-size: 40px;
+        font-size: 28px;
+        line-height: 42px;
     }
 
     .single-post>.post>figcaption p {
@@ -330,15 +329,18 @@ input[type=checkbox]:checked~.menu_language {
     border-bottom: 3px solid #D5944D;
 }
 
-.wrapper {
+.wrapper-posts {
     display: flex;
     flex-wrap: wrap;
+}
+.wrapper {
+    display: flex;
     justify-content: center;
 }
 
 .card-post {
     overflow: hidden;
-    flex: 0 0 25.333333%;
+    flex: 0 0 27.5%;
     /* box-shadow: 0px 2px 20px #d7dfe2; */
     background: white;
     border-radius: 0.5rem;
@@ -439,6 +441,10 @@ input[type=checkbox]:checked~.menu_language {
     .card-post {
         flex: 0 0 auto;
     }
+
+    .wrapper-posts {
+        justify-content: center;
+    }
 }
 
 .view-more {
@@ -464,6 +470,7 @@ input[type=checkbox]:checked~.menu_language {
 .title-store {
     position: relative;
     z-index: 5;
+
 }
 
 .download-app>div>h2 {

@@ -18,21 +18,14 @@ class LocalizationMiddleware
     {
         $params = explode('/', $request->fullUrl());
 
-        if(in_array($params[3], config('app.allowed_languages'))){
+        if (isset($params[3]) && in_array($params[3], config('app.allowed_languages'))) {
             app()->setLocale($params[3]);
         }
-        else{
-             return redirect()->to(env('app.url') . '/' . app()->getLocale());
+        else {
+            if (isset($params[3]) && $params[3] == 'livewire')
+                return $next($request);
+            return redirect()->to(env('app.url') . '/' . app()->getLocale());
         }
-
-        // if ($request->has('setLang') && in_array($request->get('setLang'), config('app.allowed_languages'))) {
-        //     app()->setLocale($request->get('setLang'));
-        //     return redirect()->to(env('app.url') . '/' . $request->get('setLang'));
-        // }
-
-        // if (!isset($params[3]))
-        //     return redirect()->to(env('app.url') . '/' . app()->getLocale());
-        // else
-             return $next($request);
+        return $next($request);
     }
 }

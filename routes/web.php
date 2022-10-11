@@ -19,3 +19,4 @@ Route::prefix('{local}')->group(function () {
     Route::get('/', IndexPageController::class)->name('index');
     Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');
 });
+

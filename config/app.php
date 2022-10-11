@@ -58,6 +58,24 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'cova_url' => env('cova_url',[
+                        'index' => 'https://www.covaapp.com/',
+                        'provider' => 'https://www.covaapp.com/partner',
+                        'rider' => 'https://www.covaapp.com/rider',
+                        'contact'=> 'https://www.covaapp.com/contact',
+                    ]),
+
+    'cova_app'=> env('cova_app',[
+                        'app_store' => '#',
+                        'play_store' => '#',
+                        'app_gallery'=> '#',
+                    ]),
+
+    'cova_social'=> env('cova_social',[
+                        'youtube' => '#',
+                        'twitter' => '#',
+                        'instagram'=> '#',
+                    ]),
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

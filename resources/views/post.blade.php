@@ -76,8 +76,8 @@
 
                 <div class="inter-font mt-5">
                     <hr style="width: 34px;">
-                    <div>Posted be Cova</div>
-                    <span>Category : </span>
+                    <div>{{__('Posted be Cova')}}</div>
+                    <span>{{__('Category')}} : </span>
                     <u> {{ $post->category->name }}</u>
                 </div>
 

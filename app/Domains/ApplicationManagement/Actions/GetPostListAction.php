@@ -17,6 +17,6 @@ class GetPostListAction implements Actionable
 
     public function execute()
     {
-        return Post::paginate(5);
+        return Post::latest()->limit(10)->get();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Domains\ApplicationManagement\Http\Controllers;
 
-use App\Domains\ApplicationManagement\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domains\ApplicationManagement\Services\PostService;
@@ -20,7 +19,8 @@ class IndexPageController extends Controller
     {
         $categories = $categoryService->index($request);
         $posts = $postService->index($request);
-        return view('index', compact('categories', 'posts'));
+        $post= $postService->showOnHomePage($request);
+        return view('index', compact('categories', 'posts', 'post'));
 
     }
 

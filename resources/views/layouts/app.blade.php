@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     @yield('css')
+    @livewireStyles
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -32,24 +33,40 @@
 <script>
     let language = "{{ app()->getLocale() }}";
     window.onload = function() {
-        if (language == "en") {
+        if (language == "ar") {
+            let ar = document.getElementById("ar");
+            ar.classList.add("active");
+            ar.querySelector(".check").classList.remove("d-none");
+            let canvas_navbar = document.getElementById("offcanvasNavbar");
+            canvas_navbar.classList.remove("offcanvas-start");
+            canvas_navbar.classList.add("offcanvas-end");
+            document.querySelector(".language-dropdown").classList.add("left-0-px");
+            let style = document.getElementById('triangle-shadow').style;
+            style.setProperty('--left', '25px');
+            document.querySelector(".title-store").style.setProperty('margin', 'auto');
+        }
+        else {
             let en = document.getElementById("en");
             en.classList.add("active");
             en.querySelector(".check").classList.remove("d-none");
             document.querySelector(".language-dropdown").classList.add("right-0-px");
-            var style = document.getElementById('triangle-shadow').style;
+            let style = document.getElementById('triangle-shadow').style;
             style.setProperty('--right', '25px');
-
-        } else {
-            let ar = document.getElementById("ar");
-            ar.classList.add("active");
-            ar.querySelector(".check").classList.remove("d-none");
-            document.querySelector(".language-dropdown").classList.add("left-0-px");
-            var style = document.getElementById('triangle-shadow').style;
-            style.setProperty('--left', '25px');
-
         }
     }
-</script>
 
+    document.getElementById("checkbox_language").addEventListener("change", function() {
+        document.querySelector(".angle").innerHTML = "";
+        let img = document.createElement("img");
+        img.width = 14;
+        if (this.checked) {
+            img.src = "{{asset('img/icon/angle-down.svg')}}";
+        } else {
+            img.src = "{{asset('img/icon/angle-up.svg')}}";
+        }
+        document.querySelector(".angle").appendChild(img);
+    });
+
+</script>
+@livewireScripts
 </html>

@@ -4,6 +4,7 @@ namespace App\Domains\ApplicationManagement\Models;
 
 use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\File;
 use Database\Factories\PostFactory;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, HasTags, InteractsWithMedia;
 
@@ -29,7 +30,7 @@ class Post extends Model
      *
      * @var array<string>
      */
-    protected $appends = ['image','tags'];
+    protected $appends = ['image'];
 
     /**
      * The attributes that are mass assignable.
@@ -87,6 +88,14 @@ class Post extends Model
         return Attribute::make(
             get: fn ($value) => $this->getFirstMediaUrl('posts'),
         );
+    }
+
+    /**
+     * get post model have name tags is show on home page.
+     */
+    public function scopeShowOnHomePage(): Post
+    {
+        return Post::withAllTags(['show on home page'],'show_on_home_page')->latest()->first();
     }
 
 }
