@@ -37,6 +37,7 @@ class Categories extends Component
         $post = Post::where('category_id', $id)->latest()->paginate(5, ['*'], 'page', 1);
         array_push($this->posts, ...$post);
         $this->lastPage = $post->lastPage();
+        $this->count = 1;
     }
 
     public function showAllPosts()
@@ -45,6 +46,7 @@ class Categories extends Component
         array_push($this->posts, ...$posts);
         $this->lastPage = $posts->lastPage();
         $this->category_id = 0;
+        $this->count = 1;
     }
 
     public function next(): void

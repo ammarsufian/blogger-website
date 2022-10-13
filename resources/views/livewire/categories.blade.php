@@ -1,9 +1,3 @@
-{{-- <div>
-    @foreach ($categories as $category)
-        <a wire:click="showPosts({{ $category->id }})">{{ $category->name }}</a>
-    @endforeach
-</div> --}}
-
 <section class="posts">
     <nav class="nav-posts">
         <ul class="nav nav-posts-ul">
@@ -70,16 +64,19 @@
         </div>
     </div>
     <div id="view_more" class="view-more">
-        @if($count>1)
-        <button class="btn btn-light m-1" type="button" wire:click="$emit('previous')">
-            {{__('Previous')}}
-        </button>
-        @endif
-        @if ($count<$lastPage)
-            <button class="btn btn-light m-1" type="button" wire:click="$emit('next')">
-                {{__('Next')}}
+        <span id="scroll_up">
+            @if($count>1)
+            <button id="previous_scroll_up" class="btn btn-light m-1" type="button" wire:click="$emit('previous')">
+                {{__('Previous')}}
             </button>
-        @endif
+            @endif
+            @if ($count<$lastPage)
+                <button id="next_scroll_up" class="btn btn-light m-1" type="button" wire:click="$emit('next')">
+                    {{__('Next')}}
+                </button>
+            @endif
+        </span>
+
     </div>
     <!-- nav All Company updates Tips -->
 
