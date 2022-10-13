@@ -9,26 +9,24 @@
         <ul class="nav nav-posts-ul">
 
             <li class="nav-posts-li">
-                <a wire:click="showAllPosts() id="all" class="nav-link  nav-link-posts {{$category->id??'active'}}">
+                <a wire:click="showAllPosts() id="all" class="nav-link  nav-link-posts {{$category_id==0?'active':''}}">
                     All
                 </a>
             </li>
 
-            @foreach ($categories as $category_item)
+            @foreach ($categories as $category)
                 <li class="nav-posts-li">
-                    <a wire:click="showPostsByCategory({{ $category_item->id }})"
+                    <a wire:click="showPostsByCategory({{ $category->id }})"
                         class="nav-link  nav-link-posts
-                        @if((isset($category))&&($category->id==$category_item->id))
-                        {{'active'}}
-                        @endif">
-                        {{ $category_item->name }}
+                        {{$category_id==$category->id?'active':''}}">
+                        {{ $category->name }}
                     </a>
                 </li>
             @endforeach
         </ul>
     </nav>
     <div class="wrapper">
-        <div class="wrapper-posts" id="blogs">
+        <div class="wrapper-posts" id="blogs" wire:init="loadData">
             @foreach ($posts as $post)
                 <figure class="card-post">
                     <a href="{{ route('post.show', [app()->getLocale(), $post->id]) }}" class="card-post-link">
@@ -71,6 +69,18 @@
             </figure>
         </div>
     </div>
-    <div id="view_more" class="view-more">{{ __('View more') }}</div>
+    <div id="view_more" class="view-more">
+        @if($count>1)
+        <button class="btn btn-light m-1" type="button" wire:click="$emit('previous')">
+            {{__('Previous')}}
+        </button>
+        @endif
+        @if ($count<$lastPage)
+            <button class="btn btn-light m-1" type="button" wire:click="$emit('next')">
+                {{__('Next')}}
+            </button>
+        @endif
+    </div>
     <!-- nav All Company updates Tips -->
+
 </section>

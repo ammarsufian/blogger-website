@@ -17,11 +17,8 @@ class IndexPageController extends Controller
      */
     public function __invoke(Request $request , CategoryService $categoryService, PostService $postService)
     {
-        $categories = $categoryService->index($request);
-        $posts = $postService->index($request);
         $post= $postService->showOnHomePage($request);
-        return view('index', compact('categories', 'posts', 'post'));
-
+        return view('index', compact('post'));
     }
 
 }

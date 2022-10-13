@@ -17,6 +17,6 @@ class GetPostByCategoryAction implements Actionable
 
     public function execute()
     {
-        return Post::where('category_id', $this->request->category_id)->paginate(6);
+        return Post::where('category_id', $this->request->category_id)->latest()->paginate(5);
     }
 }

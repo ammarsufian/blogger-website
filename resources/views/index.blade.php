@@ -32,5 +32,5 @@
         </figure>
     </section>
     @livewire('categories')
-
+    {{-- <livewire:categories :data="$data" /> --}}
 @endsection
