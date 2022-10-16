@@ -12,6 +12,7 @@ use App\Domains\ApplicationManagement\Models\Category;
 class PostFactory extends Factory
 {
     protected $model = Post::class;
+
     /**
      * Define the model's default state.
      *
@@ -28,7 +29,7 @@ class PostFactory extends Factory
                 'en' => $this->faker->paragraph,
                 'ar' => $this->faker->paragraph,
             ],
-            'category_id' =>Category::factory(),
+            'category_id' => Category::factory(),
         ];
 
     }

@@ -26,6 +26,7 @@ class Category extends Model
      * @var array<string>
      */
     protected $guarded = [];
+
     /**
      * New Factory Instance for the Model.
      */
@@ -33,10 +34,11 @@ class Category extends Model
     {
         return CategoryFactory::new();
     }
+
     /**
      * Get the posts for the category.
      */
-    public function posts():HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
@@ -44,7 +46,7 @@ class Category extends Model
     /**
      * Scope a query to only include active categories.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
 

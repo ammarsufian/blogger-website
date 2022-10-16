@@ -2,6 +2,7 @@
 
 namespace App\Domains\ApplicationManagement\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
@@ -50,14 +51,11 @@ class Post extends Model implements HasMedia
     /**
      * Get the category that owns the post.
      */
-    public function category():BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Get the tags that owns the post.
-     */
     public function tags(): MorphToMany
     {
         return $this
@@ -86,16 +84,18 @@ class Post extends Model implements HasMedia
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $this->getFirstMediaUrl('posts'),
+            get: fn($value) => $this->getFirstMediaUrl('posts'),
         );
     }
 
     /**
      * get post model have name tags is show on home page.
      */
-    public function scopeShowOnHomePage(): Post
+    public function scopeOfTag(Builder $query, string $tagName): Builder
     {
-        return Post::withAllTags(['show on home page'],'show_on_home_page')->latest()->first();
+        return $query->whereHas('tags', function (Builder $query) use ($tagName) {
+            return $query->where('slug', $tagName);
+        });
     }
 
 }
