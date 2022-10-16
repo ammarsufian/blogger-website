@@ -13,3 +13,10 @@ window.addEventListener('scroll', function() {
   else { remove_class_on_scroll() }
 
 })
+
+document.getElementById('scroll_up').addEventListener("click", function() {
+    let box = document.querySelector('.single-post');
+    let height = box.offsetHeight;
+    window.scrollTo(0, height);
+});
+

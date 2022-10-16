@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Domains\ApplicationManagement\Http\Controllers\IndexPageController;
+use App\Domains\ApplicationManagement\Http\Controllers\PostDetailPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::prefix('{local}')->group(function () {
+    Route::get('/', IndexPageController::class)->name('index');
+    Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');
 });
-Route::get('/post/{id}', function ($id) {
-    return view('post', ['id' => $id]);
-});
+

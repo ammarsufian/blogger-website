@@ -1,7 +1,22 @@
 {
-    "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.",
-    "The :attribute must contain at least one number.": "The :attribute must contain at least one number.",
-    "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
-    "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.",
-    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute."
+    "ar": "العربية",
+    "en": "English",
+    "Home": "Home",
+    "Blog": "Blog",
+    "Contact": "Contact",
+    "Become a partner": "Become a partner",
+    "Become a rider":  "Become a rider",
+    "About us": "About us",
+    "Terms & Conditions": "Terms & Conditions",
+    "Order and your coffee delivered to doorstep": "Order and your coffee delivered to doorstep",
+    "Download Cova on your mobile": "Download Cova on your mobile",
+    "Get a coffee when you need one": "Get a coffee when you need one",
+    "Sign up to order": "Sign up to order",
+    "Reach more customers than ever.": "Reach more customers than ever.",
+    "Sign up to be partner": "Sign up to be partner",
+    "View more": "View more",
+    "Posted be Cova": "Posted be Cova",
+    "Category": "Category",
+    "Previous": "Previous",
+    "Next": "Next"
 }
