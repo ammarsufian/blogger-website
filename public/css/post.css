@@ -66,6 +66,16 @@ article>h1 {
 .markdown{
     width: 85%;
 }
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 48px;
+    color: #252B42;
+}
+.markdown p {
+    font-size: 1.2rem;
+}
 @media screen and (max-width: 481px) {
     .head-content {
         font-size: 1.2rem;
@@ -79,6 +89,16 @@ article>h1 {
     .markdown{
         width: 100%;
     }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 48px;
+        color: #252B42;
+    }
+    .markdown p {
+        font-size: 1rem;
+    }
 }
 
 @media screen and (min-width:481px) and (max-width: 769px) {
@@ -88,6 +108,13 @@ article>h1 {
     }
     .markdown{
         width: 90%;
+    }
+    .markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 48px;
+        color: #252B42;
     }
 }
 

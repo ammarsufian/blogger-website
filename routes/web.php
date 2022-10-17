@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Livewire\ShowPost;
-use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\IndexPage;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +18,5 @@ use App\Http\Livewire\IndexPage;
 Route::prefix('{local}')->group(function () {
     Route::get('/', IndexPage::class)->name('index');
     Route::get('/post/{post}', ShowPost::class)->name('post.show');
-    // Route::get('/test/{post}',ShowPost::class)->name('post.show');
 });
 

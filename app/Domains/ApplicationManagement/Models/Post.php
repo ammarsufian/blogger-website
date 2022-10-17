@@ -51,7 +51,7 @@ class Post extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('logo')
+        $this->addMediaCollection('image')
             ->acceptsFile(function (File $file) {
                 return in_array($file->mimeType, [
                     'image/jpg',
