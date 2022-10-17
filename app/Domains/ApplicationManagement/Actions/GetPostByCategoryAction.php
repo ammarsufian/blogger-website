@@ -8,15 +8,16 @@ use App\Domains\ApplicationManagement\Models\Post;
 
 class GetPostByCategoryAction implements Actionable
 {
-    protected Request $request;
-
-    public function __construct(Request $request)
+    protected  $category_id;
+    protected  $page;
+    public function __construct($category_id, $page)
     {
-        $this->request = $request;
+        $this->category_id = $category_id;
+        $this->page = $page;
     }
 
     public function execute()
     {
-        return Post::where('category_id', $this->request->category_id)->latest()->paginate(5);
+        return Post::ByCategory($this->category_id)->latest()->paginate(5, ['*'], 'page', $this->page);
     }
 }

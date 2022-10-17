@@ -25,8 +25,8 @@ class PostFactory extends Factory
                 'ar' => $this->faker->sentence,
             ],
             'content' => [
-                'en' => $this->faker->paragraph,
-                'ar' => $this->faker->paragraph,
+                'en' => $this->faker->paragraph(50),
+                'ar' => $this->faker->paragraph(50),
             ],
             'category_id' =>Category::factory(),
         ];

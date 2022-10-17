@@ -2,21 +2,19 @@
 
 namespace App\Domains\ApplicationManagement\Actions;
 
-use Illuminate\Http\Request;
 use App\Domains\Interfaces\Actionable;
 use App\Domains\ApplicationManagement\Models\Post;
 
 class GetPostListAction implements Actionable
 {
-    protected Request $request;
-
-    public function __construct(Request $request)
+    protected  $page;
+    public function __construct($page)
     {
-        $this->request = $request;
+        $this->page = $page;
     }
 
     public function execute()
     {
-        return Post::latest()->paginate(5);
+        return Post::latest()->paginate(5, ['*'], 'page', $this->page);
     }
 }
