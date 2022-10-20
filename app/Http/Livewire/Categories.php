@@ -4,10 +4,8 @@ namespace App\Http\Livewire;
 
 
 use Livewire\Component;
-use Illuminate\Http\Request;
-use App\Domains\ApplicationManagement\Models\Post;
-use App\Domains\ApplicationManagement\Services\CategoryService;
 use App\Domains\ApplicationManagement\Services\PostService;
+use App\Domains\ApplicationManagement\Services\CategoryService;
 
 class Categories extends Component
 {
@@ -23,6 +21,7 @@ class Categories extends Component
         $this->categories = $categoryService->index();
         $this->category_id = 0;
         $this->count = 1;
+        
     }
 
     public function loadData(PostService $postService):void
@@ -35,7 +34,8 @@ class Categories extends Component
     public function showPostsByCategory(PostService $postService, $id)
     {
         $this->category_id = $id;
-        $post = $postService->showByCategory($id);
+        $post = $postService->showByCategoryId($id);
+        // dd($post);
         array_push($this->posts, ...$post);
         $this->lastPage = $post->lastPage();
         $this->count = 1;
@@ -56,7 +56,7 @@ class Categories extends Component
         if ($this->category_id == 0) {
             array_push($this->posts, ...$postService->index($page));
         } else {
-            array_push($this->posts, ...$postService->showByCategory($this->category_id, $page));
+            array_push($this->posts, ...$postService->showByCategoryId($this->category_id, $page));
         }
     }
 
@@ -66,7 +66,7 @@ class Categories extends Component
         if ($this->category_id == 0) {
             array_push($this->posts, ...$postService->index($page));
         } else {
-            array_push($this->posts, ...$postService->showByCategory($this->category_id, $page));
+            array_push($this->posts, ...$postService->showByCategoryId($this->category_id, $page));
         }
     }
 

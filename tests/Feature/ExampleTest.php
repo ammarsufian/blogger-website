@@ -14,7 +14,9 @@ class ExampleTest extends TestCase
      */
     public function test_the_application_returns_a_successful_response()
     {
-        $response = $this->get('/ar');
+        $response = $this->followingRedirects()->get('/');
         $response->assertStatus(200);
+        $params = explode('/', url()->current());
+        $this->assertEquals($params[3], app()->getLocale());     
     }
 }

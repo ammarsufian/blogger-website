@@ -6,7 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Domains\ApplicationManagement\Models\Post;
 use App\Domains\ApplicationManagement\Actions\GetPostListAction;
-use App\Domains\ApplicationManagement\Actions\GetPostByCategoryAction;
+use App\Domains\ApplicationManagement\Actions\GetPostByCategoryIdAction;
 
 class PostService
 {
@@ -27,7 +27,7 @@ class PostService
     public function showOnHomePage()
     {
         try {
-            $results = Post::ShowOnHomePage();
+            $results = Post::ShowByTags(Post::SHOW_ON_HOMEPAGE, Post::TYPE_SHOW_ON_HOMEPAGE);
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
@@ -37,10 +37,10 @@ class PostService
         return $results;
     }
 
-    public function showByCategory(int $category_id, int $page=1)
+    public function showByCategoryId(int $category_id, int $page=1)
     {
         try {
-            $results = (new GetPostByCategoryAction($category_id, $page))->execute();
+            $results = (new GetPostByCategoryIdAction($category_id, $page))->execute();
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),

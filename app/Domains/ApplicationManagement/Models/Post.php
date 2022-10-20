@@ -19,7 +19,8 @@ class Post extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, HasTags, InteractsWithMedia;
 
-
+    const SHOW_ON_HOMEPAGE = ["show on home page"];
+    const TYPE_SHOW_ON_HOMEPAGE = "show_on_home_page";
     public array $translatable = ['title', 'content'];
 
 
@@ -69,17 +70,17 @@ class Post extends Model implements HasMedia
         );
     }
     
-    public function scopeShowOnHomePage(Builder $query)
+    public function scopeShowByTags(Builder $query, array $tags, string $type)
     {
-        return $query->withAllTags(['show on home page'],'show_on_home_page')
+        return $query->withAllTags($tags,$type)
                 ->latest()->first();
     }
 
     
-    public function scopeByCategory(Builder $query, $category_id)
+    public function scopeByCategoryId(Builder $query, $category_id)
     {
         return $query->whereHas('category', function ($query) use ($category_id) {
             $query->where('id', $category_id);
-        });
+        })->with('category');
     }
 }

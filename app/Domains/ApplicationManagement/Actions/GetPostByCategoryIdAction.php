@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Domains\Interfaces\Actionable;
 use App\Domains\ApplicationManagement\Models\Post;
 
-class GetPostByCategoryAction implements Actionable
+class GetPostByCategoryIdAction implements Actionable
 {
     protected  $category_id;
     protected  $page;
@@ -18,6 +18,7 @@ class GetPostByCategoryAction implements Actionable
 
     public function execute()
     {
-        return Post::ByCategory($this->category_id)->latest()->paginate(5, ['*'], 'page', $this->page);
+        return Post::ByCategoryId($this->category_id)->latest()
+            ->paginate(5);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Domains\ApplicationManagement\Models\Post;
+use Illuminate\Support\Str;
 use Spatie\Tags\Tag;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TagsSeeder extends Seeder
@@ -17,9 +16,11 @@ class TagsSeeder extends Seeder
     public function run()
     {
 
-        $tag=Tag::findOrCreate('show on home page', 'show_on_home_page');
-        $tag->setTranslation('name', 'en', 'show on home page');
-        $tag->save();
+        Tag::updateOrCreate(['slug' => Str::slug('show on home page')], [
+            'name' => ['en' => 'show on home page', 'ar' => 'show on home page'],
+            'type' => 'show_on_home_page',
+            'slug' => Str::slug('show on home page'),
+        ]);
 
     }
 }
