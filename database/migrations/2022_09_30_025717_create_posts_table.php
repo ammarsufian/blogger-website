@@ -18,7 +18,7 @@ return new class extends Migration
             $table->json('title');
             $table->json('content');
             // foreign key to categories table
-            $table->foreignId('category_id')->constrained('categories');
+            $table->foreignId('category_id')->constrained('blog_categories');
 
             $table->timestamps();
         });
