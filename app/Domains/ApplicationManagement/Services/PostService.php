@@ -2,18 +2,18 @@
 
 namespace App\Domains\ApplicationManagement\Services;
 
-use App\Domains\ApplicationManagement\Actions\GetPostListAction;
-use App\Domains\ApplicationManagement\Actions\GetPostDetailAction;
-use App\Domains\ApplicationManagement\Models\Post;
 use Exception;
 use Illuminate\Http\Request;
+use App\Domains\ApplicationManagement\Models\Post;
+use App\Domains\ApplicationManagement\Actions\GetPostListAction;
+use App\Domains\ApplicationManagement\Actions\GetPostByCategoryIdAction;
 
 class PostService
 {
-    public function index(Request $request)
+    public function index(int $page=1)
     {
         try {
-            $results = (new GetPostListAction($request))->execute();
+            $results = (new GetPostListAction($page))->execute();
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
@@ -24,10 +24,10 @@ class PostService
         return $results;
     }
 
-    public function show(Request $request)
+    public function showOnHomePage()
     {
         try {
-            $results = (new GetPostDetailAction($request))->execute();
+            $results = Post::ShowByTags(Post::SHOW_ON_HOMEPAGE, Post::TYPE_SHOW_ON_HOMEPAGE);
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
@@ -37,10 +37,10 @@ class PostService
         return $results;
     }
 
-    public function showOnHomePage(Request $request)
+    public function showByCategoryId(int $category_id, int $page=1)
     {
         try {
-            $results = Post::ShowOnHomePage();
+            $results = (new GetPostByCategoryIdAction($category_id, $page))->execute();
         } catch (Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),

@@ -21,6 +21,7 @@
     </nav>
     <div class="wrapper">
         <div class="wrapper-posts" id="blogs" wire:init="loadData">
+               
             @foreach ($posts as $post)
                 <figure class="card-post">
                     <a href="{{ route('post.show', [app()->getLocale(), $post->id]) }}" class="card-post-link">
@@ -76,7 +77,7 @@
                 </button>
             @endif
         </span>
-
+        {{-- {{ $posts->links() }} --}}
     </div>
     <!-- nav All Company updates Tips -->
 

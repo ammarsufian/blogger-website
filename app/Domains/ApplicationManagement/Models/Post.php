@@ -13,51 +13,35 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model implements HasMedia
 {
     use HasFactory, HasTranslations, HasTags, InteractsWithMedia;
 
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array<string>
-     */
+    const SHOW_ON_HOMEPAGE = ["show on home page"];
+    const TYPE_SHOW_ON_HOMEPAGE = "show_on_home_page";
     public array $translatable = ['title', 'content'];
 
-    /**
-     * The attributes that are appendable to the model.
-     *
-     * @var array<string>
-     */
+
     protected $appends = ['image'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
+
     protected $guarded = [];
 
-    /**
-     * new Factory Instance for the Model.
-     */
+
     protected static function newFactory(): PostFactory
     {
         return PostFactory::new();
     }
 
-    /**
-     * Get the category that owns the post.
-     */
+
     public function category():BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Get the tags that owns the post.
-     */
+
     public function tags(): MorphToMany
     {
         return $this
@@ -65,12 +49,10 @@ class Post extends Model implements HasMedia
             ->orderBy('order_column');
     }
 
-    /**
-     * Set the image attribute.
-     */
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('logo')
+        $this->addMediaCollection('image')
             ->acceptsFile(function (File $file) {
                 return in_array($file->mimeType, [
                     'image/jpg',
@@ -80,22 +62,25 @@ class Post extends Model implements HasMedia
             })->singleFile();
     }
 
-    /**
-     * Get the image attribute.
-     */
+
     protected function image(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $this->getFirstMediaUrl('posts'),
         );
     }
-
-    /**
-     * get post model have name tags is show on home page.
-     */
-    public function scopeShowOnHomePage(): Post
+    
+    public function scopeShowByTags(Builder $query, array $tags, string $type)
     {
-        return Post::withAllTags(['show on home page'],'show_on_home_page')->latest()->first();
+        return $query->withAllTags($tags,$type)
+                ->latest()->first();
     }
 
+    
+    public function scopeByCategoryId(Builder $query, $category_id)
+    {
+        return $query->whereHas('category', function ($query) use ($category_id) {
+            $query->where('id', $category_id);
+        })->with('category');
+    }
 }

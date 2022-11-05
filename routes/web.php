@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Livewire\ShowPost;
+use App\Http\Livewire\IndexPage;
 use Illuminate\Support\Facades\Route;
-use App\Domains\ApplicationManagement\Http\Controllers\IndexPageController;
-use App\Domains\ApplicationManagement\Http\Controllers\PostDetailPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ use App\Domains\ApplicationManagement\Http\Controllers\PostDetailPageController;
 */
 
 Route::prefix('{local}')->group(function () {
-    Route::get('/', IndexPageController::class)->name('index');
-    Route::get('/post/{id}', PostDetailPageController::class)->name('post.show');
+    Route::get('/', IndexPage::class)->name('index');
+    Route::get('/post/{post}', ShowPost::class)->name('post.show');
 });
 
